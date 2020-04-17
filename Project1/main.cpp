@@ -45,7 +45,7 @@ int main()
 		   //
 		   if(square_vs[i]>0.90&&square_vs[i]<1.17)
 		   {
-			   if(square_area[i]>500)
+			   if(square_area[i]>700)
 			   {  
 				   cv::line(result, vtx[j], vtx[j < 3 ? j + 1 : 0], cv::Scalar(0, 0, 255), 2, CV_AA);
 			   }
@@ -69,8 +69,8 @@ int main()
 	subtract(cv::Scalar(255, 255, 255), input, inversed);
 	threshold(inversed, bny, 150, 255, THRESH_OTSU);
 	//获得连通域
-	Mat element1 = getStructuringElement(MORPH_RECT, Size(7, 7));//矩形
-	morphologyEx(bny, bny, MORPH_RECT, element1);
+	Mat element1 = getStructuringElement(MORPH_CROSS, Size(6,6));//矩形
+	morphologyEx(bny, bny, MORPH_CROSS, element1);
 
 
 	vector<vector<Point>> contours1;
@@ -99,10 +99,10 @@ int main()
 			square_vs1[i] = Y / X;
 			
 			//
-			if (square_vs1[i] <1)
+			if (square_vs1[i] >0.8)
 			{
 
-				if(square_area1[i]>1000)//&&square_area1[i]>500
+				if(square_area1[i]>2000&&square_area1[i]<10000)
 				{ 
 					cv::line(out, vtx[j], vtx[j < 3 ? j + 1 : 0], cv::Scalar(0, 0, 255), 2, CV_AA);
 				}
